@@ -1,5 +1,11 @@
 # taky-redis-members
 
+### Install
+
+```
+npm install taky-redis-members --save
+```
+
 ### Example
 
 ```
@@ -11,12 +17,13 @@ m = new Members {
   cache_time: '10 mins'
 }
 
-# add each
+# add multi
 m.add 'friends', ['Doug','Chris','Cody'], ->
 
-  # add single member
+  # add one
   m.add 'friends', 'John', ->
 
+    # get list
     m.list 'friends', (e,friends) ->
       console.log /friends/
       console.log friends
