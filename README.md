@@ -1,8 +1,8 @@
 # taky-redis-members
 
-### Example:
+### Example
 
-`
+```
 Members = require 'taky-redis-members'
 
 m = new Members {
@@ -23,5 +23,6 @@ m.add 'friends', ['Doug','Chris','Cody'], ->
 
       #/friends/
       #[ 'Cody', 'Doug', 'Chris', 'John' ]
-`
+```
+
 
