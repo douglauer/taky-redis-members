@@ -1,0 +1,12 @@
+{
+  "name": "taky-redis-members",
+  "description": "fast, simple redis-based membership interface w/ memory cache",
+  "version": "0.0.1",
+  "main": "./module.js",
+  "dependencies": {
+    "memory-cache": "~0.1.4",
+    "english-time": "0.0.9",
+    "lodash": "~3.10.1",
+    "ioredis": "~1.7.6"
+  }
+}
