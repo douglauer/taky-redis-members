@@ -1,9 +1,13 @@
 {
   "name": "taky-redis-members",
   "description": "fast, simple redis-based membership interface w/ memory cache",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "./module.js",
   "url": "https://github.com/douglauer/taky-redis-members",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/douglauer/taky-redis-members" 
+  },
   "dependencies": {
     "memory-cache": "~0.1.4",
     "english-time": "0.0.9",
