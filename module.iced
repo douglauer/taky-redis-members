@@ -21,7 +21,7 @@ module.exports = class Members
     @redis = @opts.redis
     @prefix = @opts.prefix
 
-  add: (group_name,member,cb) =>
+  add: (group_name,member,cb) ->
     key = [@prefix]
 
     if @opts.hash_group_names
