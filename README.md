@@ -1,14 +1,16 @@
 # taky-redis-members
 
-### Install
+# install
+
+using [npm](https://npmjs.org)
 
 ```
-npm install taky-redis-members --save
+npm i taky-redis-members --save
 ```
 
-### Example
+# example
 
-```
+``` coffeescript
 Members = require 'taky-redis-members'
 
 m = new Members {
