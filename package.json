@@ -3,7 +3,7 @@
   "description": "fast, simple redis-based membership interface w/ memory cache",
   "version": "0.0.6",
   "main": "./module.js",
-  "author:" "douglas lauer <taky@taky.com>",
+  "author": "douglas lauer <taky@taky.com>",
   "repository": "douglauer/taky-redis-members",
   "dependencies": {
     "memory-cache": "~0.1.4",
