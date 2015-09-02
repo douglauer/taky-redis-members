@@ -1,14 +1,16 @@
 {
   "name": "taky-redis-members",
   "description": "fast, simple redis-based membership interface w/ memory cache",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "./module.js",
   "author": "douglas lauer <taky@taky.com>",
   "repository": "douglauer/taky-redis-members",
   "keywords": [
+    "taky",
+    "redis",
     "ioredis",
-    "membership",
-    "members"
+    "member",
+    "membership"
   ],
   "dependencies": {
     "memory-cache": "~0.1.4",
