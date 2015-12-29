@@ -183,6 +183,90 @@
       }
     };
 
+    Members.prototype.remove = function(group_name, member, cb) {
+      var cache_key, e, key, members, r, x, ___iced_passed_deferral, __iced_deferrals, __iced_k, _ref;
+      __iced_k = __iced_k_noop;
+      ___iced_passed_deferral = iced.findDeferral(arguments);
+      key = [this.prefix];
+      if (this.opts.hash_group_names) {
+        key.push(this._md5(group_name));
+      } else {
+        key.push(group_name);
+      }
+      if ((_ref = this._type(member)) !== 'string' && _ref !== 'array') {
+        try {
+          member = member.toString();
+        } catch (_error) {}
+      }
+      if (this._type(member) === 'string') {
+        members = [member];
+      } else {
+        members = member;
+      }
+      (function(_this) {
+        return (function(__iced_k) {
+          var _i, _len, _ref1, _results, _while;
+          _ref1 = members;
+          _len = _ref1.length;
+          _i = 0;
+          _results = [];
+          _while = function(__iced_k) {
+            var _break, _continue, _next;
+            _break = function() {
+              return __iced_k(_results);
+            };
+            _continue = function() {
+              return iced.trampoline(function() {
+                ++_i;
+                return _while(__iced_k);
+              });
+            };
+            _next = function(__iced_next_arg) {
+              _results.push(__iced_next_arg);
+              return _continue();
+            };
+            if (!(_i < _len)) {
+              return _break();
+            } else {
+              x = _ref1[_i];
+              if (_this.opts.trim_values) {
+                x = x.trim();
+              }
+              cache_key = key.join(':') + x;
+              cache.del(cache_key);
+              (function(__iced_k) {
+                __iced_deferrals = new iced.Deferrals(__iced_k, {
+                  parent: ___iced_passed_deferral,
+                  filename: "/private/var/www/z/modules/taky-redis-members/module.iced",
+                  funcname: "Members.remove"
+                });
+                _this.redis.srem(key.join(':'), member, __iced_deferrals.defer({
+                  assign_fn: (function() {
+                    return function() {
+                      e = arguments[0];
+                      return r = arguments[1];
+                    };
+                  })(),
+                  lineno: 85
+                }));
+                __iced_deferrals._fulfill();
+              })(function() {
+                if (e) {
+                  return cb(e);
+                }
+                return _next();
+              });
+            }
+          };
+          _while(__iced_k);
+        });
+      })(this)((function(_this) {
+        return function() {
+          return cb(null, members.length);
+        };
+      })(this));
+    };
+
     Members.prototype.list = function(group_name, cb) {
       var key;
       key = [this.prefix];
@@ -226,9 +310,15 @@
     m.add('friends', ['Doug', 'Chris', 'Cody'], function() {
       return m.add('friends', 'John', function() {
         return m.list('friends', function(e, friends) {
-          log(/friends/);
+          log(/friends before removal/);
           log(friends);
-          return process.exit(1);
+          return m.remove('friends', ['Cody', 'John', 'noexists'], function() {
+            return m.list('friends', function(e, friends) {
+              log(/friends after removal/);
+              log(friends);
+              return process.exit(1);
+            });
+          });
         });
       });
     });

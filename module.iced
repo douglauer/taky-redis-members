@@ -61,6 +61,33 @@ module.exports = class Members
 
       return cb e,r if cb
 
+  remove: (group_name,member,cb) ->
+    key = [@prefix]
+
+    if @opts.hash_group_names
+      key.push @_md5 group_name
+    else
+      key.push group_name
+
+    if @_type(member) !in ['string','array']
+      try member = member.toString()
+
+    if @_type(member) is 'string'
+      members = [member]
+    else
+      members = member
+
+    for x in members
+      if @opts.trim_values then x = x.trim()
+
+      cache_key = key.join(':') + x
+      cache.del(cache_key)
+
+      await @redis.srem key.join(':'), member, defer e,r
+      if e then return cb e
+
+    return cb null, members.length
+
   list: (group_name,cb) ->
     key = [@prefix]
 
@@ -91,8 +118,14 @@ if process.env.TAKY_DEV and !module.parent
   m.add 'friends', ['Doug','Chris','Cody'], ->
     m.add 'friends', 'John', ->
       m.list 'friends', (e,friends) ->
-        log /friends/
+
+        log /friends before removal/
         log friends
 
-        process.exit 1
+        m.remove 'friends', ['Cody','John','noexists'], ->
+          m.list 'friends', (e,friends) ->
+            log /friends after removal/
+            log friends
+
+            process.exit 1
 
