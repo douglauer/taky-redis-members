@@ -1,7 +1,7 @@
 # vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 _ = require 'lodash'
 
-etime = require 'english-time'
+etime = require 'english-time-mirror'
 cache = require 'memory-cache'
 crypto = require 'crypto'
 
