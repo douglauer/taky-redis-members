@@ -13,9 +13,9 @@
     "membership"
   ],
   "dependencies": {
-    "memory-cache": "~0.1.4",
-    "english-time": "0.0.9",
+    "english-time-mirror": "0.0.9",
+    "ioredis": "~1.7.6",
     "lodash": "~3.10.1",
-    "ioredis": "~1.7.6"
+    "memory-cache": "~0.1.4"
   }
 }
