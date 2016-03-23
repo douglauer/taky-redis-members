@@ -47,7 +47,7 @@
 
   _ = require('lodash');
 
-  etime = require('english-time');
+  etime = require('english-time-mirror');
 
   cache = require('memory-cache');
 
